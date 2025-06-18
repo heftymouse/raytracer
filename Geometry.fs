@@ -17,8 +17,8 @@ type Sphere =
             let oc = this.Center - origin
             let a = direction.LengthSquared()
             let h = Vector3.Dot(direction, oc)
-            let c = oc.LengthSquared() - this.Radius ** 2f
-            let d = h ** 2f - a * c
+            let c = oc.LengthSquared() - this.Radius * this.Radius
+            let d = h * h - a * c
 
             if d < 0f then
                 None

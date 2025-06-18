@@ -39,7 +39,7 @@ let main _ =
     // output options
     let outWidth = 1280
     let outHeight = 720
-    let spp = 32
+    let spp = 256
 
     // camera options
     let lookFrom = Vector3(13f, 2f, 3f)
