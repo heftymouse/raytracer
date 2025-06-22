@@ -19,9 +19,9 @@ type Vector3 with
     static member randomUnit = Vector3.random 0f 1f |> Vector3.Normalize
 
 type Ray = Ray of Vector3 * Vector3 with
-    static member at (Ray(origin, direction)) (t: single): Vector3 = origin + direction * t
+    static member inline at (Ray(origin, direction)) (t: single): Vector3 = origin + direction * t
     
 let clamp (min, max) value =
     if value < min then min
-    elif value > max then max
+    elif value >= max then max
     else value

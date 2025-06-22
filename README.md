@@ -4,6 +4,6 @@ This is my attempt at [Ray Tracing in One Weekend](https://raytracing.github.io/
 
 ![Output](final-image.png)
 
-This image was created at 1280x720 at 256 samples per pixel. It took 5 minutes 30 seconds to run on my machine (Ryzen 9 7940HS, Windows 11) on a release build. A simple scene with 4 spheres renders in ~3 seconds.
+This image was created at 1280x720 at 256 samples per pixel. It took 4 minutes 50 seconds to run on my machine (Ryzen 9 7940HS, Windows 11) on a release build. A simple scene with 4 spheres renders in ~3 seconds.
 
 This project can be run with the `dotnet run` command from the [.NET SDK](https://dotnet.microsoft.com/en-us/download).

@@ -23,12 +23,18 @@ type Sphere =
             if d < 0f then
                 None
             else
-                let ts = [ (h - sqrt d) / a; (h + sqrt d) / a ] |> List.filter (fun x -> x > 0.001f)
+                let t =
+                    let t' = (h - sqrt d) / a
 
-                match ts with
-                | [] -> None
-                | _ ->
-                    let t = List.min ts
+                    if t' < 0.001f then
+                        let t' = (h + sqrt d) / a
+                        if t' < 0.001f then None else Some t'
+                    else
+                        Some t'
+
+                match t with
+                | None -> None
+                | Some t ->
                     let p = Ray.at ray t
                     let n' = (p - this.Center) / this.Radius
                     let frontFace = Vector3.Dot(n', direction) <= 0f

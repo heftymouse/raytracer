@@ -5,7 +5,7 @@ open System.Numerics
 
 let toPPM width height pixels =
     let inline toPPMValue (x: single) =
-        (if x > 0f then sqrt x else 0f) |> clamp (0f, 1f) |> (*) 255f |> int
+        (if x > 0f then sqrt x else 0f) |> clamp (0f, 1f) |> (*) 256f |> int
 
     let actualPixels =
         pixels

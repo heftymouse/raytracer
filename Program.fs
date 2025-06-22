@@ -20,7 +20,7 @@ let rayColor (world: IHittable list) (spp: int) genSample center =
                 | [] ->
                     let (Ray(_, direction)) = ray
                     let unitDir = Vector3.Normalize direction
-                    let a = 0.5f * unitDir.Y + 1f
+                    let a = 0.5f * (unitDir.Y + 1f)
                     Vector3.One * (1f - a) + Vector3(0.5f, 0.7f, 1f) * a
                 | _ ->
                     let closest = hits |> List.minBy (fun hr -> hr.T)
@@ -127,16 +127,23 @@ let main _ =
         e
 
     let rays =
-        [| for y in 0 .. (outHeight - 1) ->
-               [| for x in 0 .. (outWidth - 1) ->
+        [| for y in 0 .. (outHeight - 1) do
+               for x in 0 .. (outWidth - 1) ->
                       let x' = (single x / single outWidth - 0.5f) * imgWidth
                       let y' = -(single y / single outHeight - 0.5f) * imgHeight
 
-                      u * x' + v * y' - w * focusDistance |] |]
+                      u * x' + v * y' - w * focusDistance |]
+
+    let rows = [| for y in 0 .. (outHeight - 1) -> y * outWidth |]
 
     let rayColors =
-        rays
-        |> Array.Parallel.map (fun row -> row |> Array.map (rayColor world spp genSample))
+        rows
+        |> Array.Parallel.map (fun row ->
+            let thing = Array.zeroCreate outWidth
+            for i in 0 .. outWidth - 1 do
+                thing[i] <- rayColor world spp genSample rays[row + i]
+            thing
+        )
 
-    File.WriteAllText("out.ppm", toPPM outWidth outHeight rayColors)
+    // File.WriteAllText("out.ppm", toPPM outWidth outHeight rayColors)
     0
