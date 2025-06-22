@@ -145,5 +145,5 @@ let main _ =
             thing
         )
 
-    // File.WriteAllText("out.ppm", toPPM outWidth outHeight rayColors)
+    File.WriteAllText("out.ppm", toPPM outWidth outHeight rayColors)
     0
