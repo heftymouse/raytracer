@@ -2,3 +2,5 @@
 bin/
 obj/
 out.ppm
+.fake
+Raytracer.Bench/
